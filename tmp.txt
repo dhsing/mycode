@@ -1,722 +1,83 @@
 
-PLAY [A playbook that manipulates data from uri] *******************************
+PLAY [Ansible and RESTful interfaces] ******************************************
 
-TASK [Gathering Facts] *********************************************************
+TASK [Quick ISS API checkup] ***************************************************
+ok: [localhost] => {
+    "msg": "Today on the ISS are: [{'name': 'Jasmin Moghbeli', 'craft': 'ISS'}, {'name': 'Andreas Mogensen', 'craft': 'ISS'}, {'name': 'Satoshi Furukawa', 'craft': 'ISS'}, {'name': 'Konstantin Borisov', 'craft': 'ISS'}, {'name': 'Oleg Kononenko', 'craft': 'ISS'}, {'name': 'Nikolai Chub', 'craft': 'ISS'}, {'name': \"Loral O'Hara\", 'craft': 'ISS'}]"
+}
+
+TASK [Loop through our data and display each dict (name and craft)] ************
+ok: [localhost] => (item={'name': 'Jasmin Moghbeli', 'craft': 'ISS'}) => {
+    "msg": "Loop across ISS data: {'name': 'Jasmin Moghbeli', 'craft': 'ISS'}"
+}
+ok: [localhost] => (item={'name': 'Andreas Mogensen', 'craft': 'ISS'}) => {
+    "msg": "Loop across ISS data: {'name': 'Andreas Mogensen', 'craft': 'ISS'}"
+}
+ok: [localhost] => (item={'name': 'Satoshi Furukawa', 'craft': 'ISS'}) => {
+    "msg": "Loop across ISS data: {'name': 'Satoshi Furukawa', 'craft': 'ISS'}"
+}
+ok: [localhost] => (item={'name': 'Konstantin Borisov', 'craft': 'ISS'}) => {
+    "msg": "Loop across ISS data: {'name': 'Konstantin Borisov', 'craft': 'ISS'}"
+}
+ok: [localhost] => (item={'name': 'Oleg Kononenko', 'craft': 'ISS'}) => {
+    "msg": "Loop across ISS data: {'name': 'Oleg Kononenko', 'craft': 'ISS'}"
+}
+ok: [localhost] => (item={'name': 'Nikolai Chub', 'craft': 'ISS'}) => {
+    "msg": "Loop across ISS data: {'name': 'Nikolai Chub', 'craft': 'ISS'}"
+}
+ok: [localhost] => (item={'name': "Loral O'Hara", 'craft': 'ISS'}) => {
+    "msg": "Loop across ISS data: {'name': \"Loral O'Hara\", 'craft': 'ISS'}"
+}
+
+TASK [Loop through our data and display ONLY first and last names] *************
+ok: [localhost] => (item={'name': 'Jasmin Moghbeli', 'craft': 'ISS'}) => {
+    "msg": "Astro names are: Jasmin Moghbeli"
+}
+ok: [localhost] => (item={'name': 'Andreas Mogensen', 'craft': 'ISS'}) => {
+    "msg": "Astro names are: Andreas Mogensen"
+}
+ok: [localhost] => (item={'name': 'Satoshi Furukawa', 'craft': 'ISS'}) => {
+    "msg": "Astro names are: Satoshi Furukawa"
+}
+ok: [localhost] => (item={'name': 'Konstantin Borisov', 'craft': 'ISS'}) => {
+    "msg": "Astro names are: Konstantin Borisov"
+}
+ok: [localhost] => (item={'name': 'Oleg Kononenko', 'craft': 'ISS'}) => {
+    "msg": "Astro names are: Oleg Kononenko"
+}
+ok: [localhost] => (item={'name': 'Nikolai Chub', 'craft': 'ISS'}) => {
+    "msg": "Astro names are: Nikolai Chub"
+}
+ok: [localhost] => (item={'name': "Loral O'Hara", 'craft': 'ISS'}) => {
+    "msg": "Astro names are: Loral O'Hara"
+}
+
+TASK [Create a new list with ansible of astro names] ***************************
 ok: [localhost]
 
-TASK [Use URI module to send HTTP GET] *****************************************
-ok: [localhost]
-
-TASK [Loop across the teams and display the team locations made uppercase with python] ***
-ok: [localhost] => (item=11) => {
-    "ATLANTA THRASHERS": "{{ATLANTA THRASHERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 35,
-        "fullName": "Atlanta Thrashers",
-        "id": 11,
-        "leagueId": 133,
-        "rawTricode": "ATL",
-        "triCode": "ATL"
-    }
+TASK [Only display the first names of the astros] ******************************
+ok: [localhost] => (item=Jasmin Moghbeli) => {
+    "msg": "Jasmin"
 }
-ok: [localhost] => (item=34) => {
-    "HARTFORD WHALERS": "{{HARTFORD WHALERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 26,
-        "fullName": "Hartford Whalers",
-        "id": 34,
-        "leagueId": 133,
-        "rawTricode": "HFD",
-        "triCode": "HFD"
-    }
+ok: [localhost] => (item=Andreas Mogensen) => {
+    "msg": "Andreas"
 }
-ok: [localhost] => (item=31) => {
-    "MINNESOTA NORTH STARS": "{{MINNESOTA NORTH STARS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 15,
-        "fullName": "Minnesota North Stars",
-        "id": 31,
-        "leagueId": 133,
-        "rawTricode": "MNS",
-        "triCode": "MNS"
-    }
+ok: [localhost] => (item=Satoshi Furukawa) => {
+    "msg": "Satoshi"
 }
-ok: [localhost] => (item=32) => {
-    "QUEBEC NORDIQUES": "{{QUEBEC NORDIQUES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 27,
-        "fullName": "Quebec Nordiques",
-        "id": 32,
-        "leagueId": 133,
-        "rawTricode": "QUE",
-        "triCode": "QUE"
-    }
+ok: [localhost] => (item=Konstantin Borisov) => {
+    "msg": "Konstantin"
 }
-ok: [localhost] => (item=33) => {
-    "WINNIPEG JETS (1979)": "{{WINNIPEG JETS (1979)}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 28,
-        "fullName": "Winnipeg Jets (1979)",
-        "id": 33,
-        "leagueId": 133,
-        "rawTricode": "WIN",
-        "triCode": "WIN"
-    }
+ok: [localhost] => (item=Oleg Kononenko) => {
+    "msg": "Oleg"
 }
-ok: [localhost] => (item=35) => {
-    "COLORADO ROCKIES": "{{COLORADO ROCKIES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 23,
-        "fullName": "Colorado Rockies",
-        "id": 35,
-        "leagueId": 133,
-        "rawTricode": "CLR",
-        "triCode": "CLR"
-    }
+ok: [localhost] => (item=Nikolai Chub) => {
+    "msg": "Nikolai"
 }
-ok: [localhost] => (item=36) => {
-    "OTTAWA SENATORS (1917)": "{{OTTAWA SENATORS (1917)}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 3,
-        "fullName": "Ottawa Senators (1917)",
-        "id": 36,
-        "leagueId": 133,
-        "rawTricode": "SEN",
-        "triCode": "SEN"
-    }
-}
-ok: [localhost] => (item=37) => {
-    "HAMILTON TIGERS": "{{HAMILTON TIGERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 4,
-        "fullName": "Hamilton Tigers",
-        "id": 37,
-        "leagueId": 133,
-        "rawTricode": "HAM",
-        "triCode": "HAM"
-    }
-}
-ok: [localhost] => (item=38) => {
-    "PITTSBURGH PIRATES": "{{PITTSBURGH PIRATES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 9,
-        "fullName": "Pittsburgh Pirates",
-        "id": 38,
-        "leagueId": 133,
-        "rawTricode": "PIR",
-        "triCode": "PIR"
-    }
-}
-ok: [localhost] => (item=39) => {
-    "PHILADELPHIA QUAKERS": "{{PHILADELPHIA QUAKERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 9,
-        "fullName": "Philadelphia Quakers",
-        "id": 39,
-        "leagueId": 133,
-        "rawTricode": "QUA",
-        "triCode": "QUA"
-    }
-}
-ok: [localhost] => (item=40) => {
-    "DETROIT COUGARS": "{{DETROIT COUGARS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 12,
-        "fullName": "Detroit Cougars",
-        "id": 40,
-        "leagueId": 133,
-        "rawTricode": "DCG",
-        "triCode": "DCG"
-    }
-}
-ok: [localhost] => (item=41) => {
-    "MONTREAL WANDERERS": "{{MONTREAL WANDERERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 2,
-        "fullName": "Montreal Wanderers",
-        "id": 41,
-        "leagueId": 133,
-        "rawTricode": "MWN",
-        "triCode": "MWN"
-    }
-}
-ok: [localhost] => (item=42) => {
-    "QUEBEC BULLDOGS": "{{QUEBEC BULLDOGS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 4,
-        "fullName": "Quebec Bulldogs",
-        "id": 42,
-        "leagueId": 133,
-        "rawTricode": "QBD",
-        "triCode": "QBD"
-    }
-}
-ok: [localhost] => (item=43) => {
-    "MONTREAL MAROONS": "{{MONTREAL MAROONS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 7,
-        "fullName": "Montreal Maroons",
-        "id": 43,
-        "leagueId": 133,
-        "rawTricode": "MMR",
-        "triCode": "MMR"
-    }
-}
-ok: [localhost] => (item=44) => {
-    "NEW YORK AMERICANS": "{{NEW YORK AMERICANS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 8,
-        "fullName": "New York Americans",
-        "id": 44,
-        "leagueId": 133,
-        "rawTricode": "NYA",
-        "triCode": "NYA"
-    }
-}
-ok: [localhost] => (item=45) => {
-    "ST. LOUIS EAGLES": "{{ST. LOUIS EAGLES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 3,
-        "fullName": "St. Louis Eagles",
-        "id": 45,
-        "leagueId": 133,
-        "rawTricode": "SLE",
-        "triCode": "SLE"
-    }
-}
-ok: [localhost] => (item=46) => {
-    "OAKLAND SEALS": "{{OAKLAND SEALS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 13,
-        "fullName": "Oakland Seals",
-        "id": 46,
-        "leagueId": 133,
-        "rawTricode": "OAK",
-        "triCode": "OAK"
-    }
-}
-ok: [localhost] => (item=47) => {
-    "ATLANTA FLAMES": "{{ATLANTA FLAMES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 21,
-        "fullName": "Atlanta Flames",
-        "id": 47,
-        "leagueId": 133,
-        "rawTricode": "AFM",
-        "triCode": "AFM"
-    }
-}
-ok: [localhost] => (item=48) => {
-    "KANSAS CITY SCOUTS": "{{KANSAS CITY SCOUTS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 23,
-        "fullName": "Kansas City Scouts",
-        "id": 48,
-        "leagueId": 133,
-        "rawTricode": "KCS",
-        "triCode": "KCS"
-    }
-}
-ok: [localhost] => (item=49) => {
-    "CLEVELAND BARONS": "{{CLEVELAND BARONS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 13,
-        "fullName": "Cleveland Barons",
-        "id": 49,
-        "leagueId": 133,
-        "rawTricode": "CLE",
-        "triCode": "CLE"
-    }
-}
-ok: [localhost] => (item=50) => {
-    "DETROIT FALCONS": "{{DETROIT FALCONS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 12,
-        "fullName": "Detroit Falcons",
-        "id": 50,
-        "leagueId": 133,
-        "rawTricode": "DFL",
-        "triCode": "DFL"
-    }
-}
-ok: [localhost] => (item=51) => {
-    "BROOKLYN AMERICANS": "{{BROOKLYN AMERICANS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 8,
-        "fullName": "Brooklyn Americans",
-        "id": 51,
-        "leagueId": 133,
-        "rawTricode": "BRK",
-        "triCode": "BRK"
-    }
-}
-ok: [localhost] => (item=1) => {
-    "NEW JERSEY DEVILS": "{{NEW JERSEY DEVILS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 23,
-        "fullName": "New Jersey Devils",
-        "id": 1,
-        "leagueId": 133,
-        "rawTricode": "NJD",
-        "triCode": "NJD"
-    }
-}
-ok: [localhost] => (item=56) => {
-    "CALIFORNIA GOLDEN SEALS": "{{CALIFORNIA GOLDEN SEALS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 13,
-        "fullName": "California Golden Seals",
-        "id": 56,
-        "leagueId": 133,
-        "rawTricode": "CGS",
-        "triCode": "CGS"
-    }
-}
-ok: [localhost] => (item=57) => {
-    "TORONTO ARENAS": "{{TORONTO ARENAS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 5,
-        "fullName": "Toronto Arenas",
-        "id": 57,
-        "leagueId": 133,
-        "rawTricode": "TAN",
-        "triCode": "TAN"
-    }
-}
-ok: [localhost] => (item=58) => {
-    "TORONTO ST. PATRICKS": "{{TORONTO ST. PATRICKS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 5,
-        "fullName": "Toronto St. Patricks",
-        "id": 58,
-        "leagueId": 133,
-        "rawTricode": "TSP",
-        "triCode": "TSP"
-    }
-}
-ok: [localhost] => (item=99) => {
-    "NHL": "{{NHL}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": null,
-        "fullName": "NHL",
-        "id": 99,
-        "leagueId": 133,
-        "rawTricode": "NHL",
-        "triCode": "NHL"
-    }
-}
-ok: [localhost] => (item=17) => {
-    "DETROIT RED WINGS": "{{DETROIT RED WINGS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 12,
-        "fullName": "Detroit Red Wings",
-        "id": 17,
-        "leagueId": 133,
-        "rawTricode": "DET",
-        "triCode": "DET"
-    }
-}
-ok: [localhost] => (item=6) => {
-    "BOSTON BRUINS": "{{BOSTON BRUINS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 6,
-        "fullName": "Boston Bruins",
-        "id": 6,
-        "leagueId": 133,
-        "rawTricode": "BOS",
-        "triCode": "BOS"
-    }
-}
-ok: [localhost] => (item=52) => {
-    "WINNIPEG JETS": "{{WINNIPEG JETS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 35,
-        "fullName": "Winnipeg Jets",
-        "id": 52,
-        "leagueId": 133,
-        "rawTricode": "WPG",
-        "triCode": "WPG"
-    }
-}
-ok: [localhost] => (item=28) => {
-    "SAN JOSE SHARKS": "{{SAN JOSE SHARKS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 29,
-        "fullName": "San Jose Sharks",
-        "id": 28,
-        "leagueId": 133,
-        "rawTricode": "SJS",
-        "triCode": "SJS"
-    }
-}
-ok: [localhost] => (item=5) => {
-    "PITTSBURGH PENGUINS": "{{PITTSBURGH PENGUINS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 17,
-        "fullName": "Pittsburgh Penguins",
-        "id": 5,
-        "leagueId": 133,
-        "rawTricode": "PIT",
-        "triCode": "PIT"
-    }
-}
-ok: [localhost] => (item=14) => {
-    "TAMPA BAY LIGHTNING": "{{TAMPA BAY LIGHTNING}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 31,
-        "fullName": "Tampa Bay Lightning",
-        "id": 14,
-        "leagueId": 133,
-        "rawTricode": "TBL",
-        "triCode": "TBL"
-    }
-}
-ok: [localhost] => (item=4) => {
-    "PHILADELPHIA FLYERS": "{{PHILADELPHIA FLYERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 16,
-        "fullName": "Philadelphia Flyers",
-        "id": 4,
-        "leagueId": 133,
-        "rawTricode": "PHI",
-        "triCode": "PHI"
-    }
-}
-ok: [localhost] => (item=10) => {
-    "TORONTO MAPLE LEAFS": "{{TORONTO MAPLE LEAFS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 5,
-        "fullName": "Toronto Maple Leafs",
-        "id": 10,
-        "leagueId": 133,
-        "rawTricode": "TOR",
-        "triCode": "TOR"
-    }
-}
-ok: [localhost] => (item=7) => {
-    "BUFFALO SABRES": "{{BUFFALO SABRES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 19,
-        "fullName": "Buffalo Sabres",
-        "id": 7,
-        "leagueId": 133,
-        "rawTricode": "BUF",
-        "triCode": "BUF"
-    }
-}
-ok: [localhost] => (item=12) => {
-    "CAROLINA HURRICANES": "{{CAROLINA HURRICANES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 26,
-        "fullName": "Carolina Hurricanes",
-        "id": 12,
-        "leagueId": 133,
-        "rawTricode": "CAR",
-        "triCode": "CAR"
-    }
-}
-ok: [localhost] => (item=53) => {
-    "ARIZONA COYOTES": "{{ARIZONA COYOTES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 28,
-        "fullName": "Arizona Coyotes",
-        "id": 53,
-        "leagueId": 133,
-        "rawTricode": "ARI",
-        "triCode": "ARI"
-    }
-}
-ok: [localhost] => (item=20) => {
-    "CALGARY FLAMES": "{{CALGARY FLAMES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 21,
-        "fullName": "Calgary Flames",
-        "id": 20,
-        "leagueId": 133,
-        "rawTricode": "CGY",
-        "triCode": "CGY"
-    }
-}
-ok: [localhost] => (item=8) => {
-    "MONTRÉAL CANADIENS": "{{MONTRÉAL CANADIENS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 1,
-        "fullName": "Montréal Canadiens",
-        "id": 8,
-        "leagueId": 133,
-        "rawTricode": "MTL",
-        "triCode": "MTL"
-    }
-}
-ok: [localhost] => (item=15) => {
-    "WASHINGTON CAPITALS": "{{WASHINGTON CAPITALS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 24,
-        "fullName": "Washington Capitals",
-        "id": 15,
-        "leagueId": 133,
-        "rawTricode": "WSH",
-        "triCode": "WSH"
-    }
-}
-ok: [localhost] => (item=26) => {
-    "LOS ANGELES KINGS": "{{LOS ANGELES KINGS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 14,
-        "fullName": "Los Angeles Kings",
-        "id": 26,
-        "leagueId": 133,
-        "rawTricode": "LAK",
-        "triCode": "LAK"
-    }
-}
-ok: [localhost] => (item=23) => {
-    "VANCOUVER CANUCKS": "{{VANCOUVER CANUCKS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 20,
-        "fullName": "Vancouver Canucks",
-        "id": 23,
-        "leagueId": 133,
-        "rawTricode": "VAN",
-        "triCode": "VAN"
-    }
-}
-ok: [localhost] => (item=21) => {
-    "COLORADO AVALANCHE": "{{COLORADO AVALANCHE}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 27,
-        "fullName": "Colorado Avalanche",
-        "id": 21,
-        "leagueId": 133,
-        "rawTricode": "COL",
-        "triCode": "COL"
-    }
-}
-ok: [localhost] => (item=18) => {
-    "NASHVILLE PREDATORS": "{{NASHVILLE PREDATORS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 34,
-        "fullName": "Nashville Predators",
-        "id": 18,
-        "leagueId": 133,
-        "rawTricode": "NSH",
-        "triCode": "NSH"
-    }
-}
-ok: [localhost] => (item=24) => {
-    "ANAHEIM DUCKS": "{{ANAHEIM DUCKS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 32,
-        "fullName": "Anaheim Ducks",
-        "id": 24,
-        "leagueId": 133,
-        "rawTricode": "ANA",
-        "triCode": "ANA"
-    }
-}
-ok: [localhost] => (item=54) => {
-    "VEGAS GOLDEN KNIGHTS": "{{VEGAS GOLDEN KNIGHTS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 38,
-        "fullName": "Vegas Golden Knights",
-        "id": 54,
-        "leagueId": 133,
-        "rawTricode": "VGK",
-        "triCode": "VGK"
-    }
-}
-ok: [localhost] => (item=55) => {
-    "SEATTLE KRAKEN": "{{SEATTLE KRAKEN}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 39,
-        "fullName": "Seattle Kraken",
-        "id": 55,
-        "leagueId": 133,
-        "rawTricode": "SEA",
-        "triCode": "SEA"
-    }
-}
-ok: [localhost] => (item=25) => {
-    "DALLAS STARS": "{{DALLAS STARS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 15,
-        "fullName": "Dallas Stars",
-        "id": 25,
-        "leagueId": 133,
-        "rawTricode": "DAL",
-        "triCode": "DAL"
-    }
-}
-ok: [localhost] => (item=27) => {
-    "PHOENIX COYOTES": "{{PHOENIX COYOTES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 28,
-        "fullName": "Phoenix Coyotes",
-        "id": 27,
-        "leagueId": 133,
-        "rawTricode": "PHX",
-        "triCode": "PHX"
-    }
-}
-ok: [localhost] => (item=16) => {
-    "CHICAGO BLACKHAWKS": "{{CHICAGO BLACKHAWKS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 11,
-        "fullName": "Chicago Blackhawks",
-        "id": 16,
-        "leagueId": 133,
-        "rawTricode": "CHI",
-        "triCode": "CHI"
-    }
-}
-ok: [localhost] => (item=3) => {
-    "NEW YORK RANGERS": "{{NEW YORK RANGERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 10,
-        "fullName": "New York Rangers",
-        "id": 3,
-        "leagueId": 133,
-        "rawTricode": "NYR",
-        "triCode": "NYR"
-    }
-}
-ok: [localhost] => (item=29) => {
-    "COLUMBUS BLUE JACKETS": "{{COLUMBUS BLUE JACKETS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 36,
-        "fullName": "Columbus Blue Jackets",
-        "id": 29,
-        "leagueId": 133,
-        "rawTricode": "CBJ",
-        "triCode": "CBJ"
-    }
-}
-ok: [localhost] => (item=13) => {
-    "FLORIDA PANTHERS": "{{FLORIDA PANTHERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 33,
-        "fullName": "Florida Panthers",
-        "id": 13,
-        "leagueId": 133,
-        "rawTricode": "FLA",
-        "triCode": "FLA"
-    }
-}
-ok: [localhost] => (item=22) => {
-    "EDMONTON OILERS": "{{EDMONTON OILERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 25,
-        "fullName": "Edmonton Oilers",
-        "id": 22,
-        "leagueId": 133,
-        "rawTricode": "EDM",
-        "triCode": "EDM"
-    }
-}
-ok: [localhost] => (item=30) => {
-    "MINNESOTA WILD": "{{MINNESOTA WILD}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 37,
-        "fullName": "Minnesota Wild",
-        "id": 30,
-        "leagueId": 133,
-        "rawTricode": "MIN",
-        "triCode": "MIN"
-    }
-}
-ok: [localhost] => (item=19) => {
-    "ST. LOUIS BLUES": "{{ST. LOUIS BLUES}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 18,
-        "fullName": "St. Louis Blues",
-        "id": 19,
-        "leagueId": 133,
-        "rawTricode": "STL",
-        "triCode": "STL"
-    }
-}
-ok: [localhost] => (item=9) => {
-    "OTTAWA SENATORS": "{{OTTAWA SENATORS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 30,
-        "fullName": "Ottawa Senators",
-        "id": 9,
-        "leagueId": 133,
-        "rawTricode": "OTT",
-        "triCode": "OTT"
-    }
-}
-ok: [localhost] => (item=2) => {
-    "NEW YORK ISLANDERS": "{{NEW YORK ISLANDERS}}",
-    "ansible_loop_var": "item",
-    "item": {
-        "franchiseId": 22,
-        "fullName": "New York Islanders",
-        "id": 2,
-        "leagueId": 133,
-        "rawTricode": "NYI",
-        "triCode": "NYI"
-    }
+ok: [localhost] => (item=Loral O'Hara) => {
+    "msg": "Loral"
 }
 
 PLAY RECAP *********************************************************************
-localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+localhost                  : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
