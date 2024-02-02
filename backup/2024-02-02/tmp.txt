@@ -1,0 +1,53 @@
+
+PLAY [Network Switch Config Saver] *********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [sw-1]
+ok: [sw-2]
+
+TASK [update ansible date/time from local host] ********************************
+ok: [sw-1]
+
+TASK [Gather EOS config only] **************************************************
+ok: [sw-1]
+ok: [sw-2]
+
+TASK [let's check out the EOS config] ******************************************
+ok: [sw-1] => {
+    "ansible_net_config": "! Command: show running-config\n! device: arista (vEOS, EOS-4.22.0F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp default-mode 4x10G\n!\nhostname arista\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername admin role network-admin secret sha512 $6$cOGTXV23PEhFEm7M$VJ61aiNU.K8M6kN8bnB31Cfs2a64LllWNdQyOvpUnqZhC79I/Yr5M1Fvu.heVvWGk1f2Vl0wwP.fZTPoQYFUe0\n!\ninterface Management1\n   ip address dhcp\n   dhcp client accept default-route\n!\nno ip routing\n!\nend"
+}
+ok: [sw-2] => {
+    "ansible_net_config": "! Command: show running-config\n! device: arista (vEOS, EOS-4.22.0F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp default-mode 4x10G\n!\nhostname arista\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername admin role network-admin secret sha512 $6$2anQpk6UCKm3x5xl$q9V7KWKjciHsHusFU.TwZFgxyqJ9RRDSPHIg1WG55gZIO.dxh/ApPBkhyK54Ywl3HgFUzlhyInKMYrynRj.J5.\n!\ninterface Management1\n   ip address dhcp\n   dhcp client accept default-route\n!\nno ip routing\n!\nend"
+}
+
+TASK [Cisco IOS fact collection] ***********************************************
+skipping: [sw-1]
+skipping: [sw-2]
+
+TASK [Cisco NXOS fact collection] **********************************************
+skipping: [sw-1]
+skipping: [sw-2]
+
+TASK [Juniper JunOS fact collection] *******************************************
+skipping: [sw-1]
+skipping: [sw-2]
+
+TASK [VyOS fact collection] ****************************************************
+skipping: [sw-1]
+skipping: [sw-2]
+
+TASK [Create dir to save switch config backups] ********************************
+ok: [sw-1]
+
+TASK [Save out backed up configuration] ****************************************
+changed: [sw-1]
+changed: [sw-2]
+
+TASK [Archival process] ********************************************************
+ok: [sw-1]
+ok: [sw-2]
+
+PLAY RECAP *********************************************************************
+sw-1                       : ok=7    changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+sw-2                       : ok=5    changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+
